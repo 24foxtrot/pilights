@@ -1,4 +1,4 @@
-This file will contain directions on how to prepare you raspberry pi for this project as well as reference information and links used in this project.
+This file will contain directions on how to prepare your raspberry pi for this project as well as reference information and links used in this project.
 
 
 
