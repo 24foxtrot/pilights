@@ -37,34 +37,35 @@ pca.frequency = 60
 #strip_kit() = 1
 
 def choose_mode():
-    global time_conversion
+        global time_conversion
+        lighting_time = 0
 
-    while True:
-        lighting_mode = random.randrange(1)
-        lighting_time = random.randrange(3,6)
-        time_conversion = lighting_time/3
+        while True:
+            lighting_mode = random.randrange(2)
+            lighting_time = random.randrange(3,6)
+            time_conversion = lighting_time/64
+#            print("The current mode is " + str(lighting_mode) + " for " + str(lighting_time) + " minutes.")
 
-        print("The current mode is " + str(lighting_mode) + " for " + str(lighting_time) + " minutes.")
-        time.sleep(time_conversion)
+            if lighting_mode == 0 :
+                print("Running simplefade")
+                simple_fade()
+            elif lighting_mode == 1:
+                print("Running stripkit")
+                strip_kit()
 
-        if lighting_mode == 0 :
-            simple_fade()
-        return
-        elif lighting_mode == 1:
-            stripkit()
-        return
-        else
-        print("Your program sucks.")
-color_fade = 0xFFFF
-fade_increment = 100
-channel_number = 0
-
+            time.sleep(time_conversion)
 
 def simple_fade():
+
+    color_fade = 0xFFFF
+    fade_increment = 100
+    channel_number = 0
+
+
     while True:
         while color_fade > -1 :
             channel_number=random.randrange(16)
-            print("Channel " + str(channel_number) + " is set to " + str(color_fade) )
+#            print("Channel " + str(channel_number) + " is set to " + str(color_fade) )
             pca.channels[channel_number].duty_cycle = color_fade
             color_fade = color_fade - fade_increment
         pca.channels[channel_number].duty_cycle = 0x0000
@@ -75,14 +76,14 @@ def simple_fade():
 
         while color_fade <= 0xFFFF :
             channel_number=random.randrange(16)
-            print("Channel " + str(channel_number) + " is set to " + str(color_fade) )
+#            print("Channel " + str(channel_number) + " is set to " + str(color_fade) )
             pca.channels[channel_number].duty_cycle = color_fade
             color_fade = color_fade + fade_increment
         color_fade = 0xFFFF #Bounds Check
         return
 
 def strip_kit():
-    wait = 1/128
+    wait = 2
 
     LEDSTRIP0 = 0, 1, 2
     LEDSTRIP1 = 3, 4, 5
@@ -123,3 +124,4 @@ def strip_kit():
             pca.channels[x].duty_cycle = LEDON
             time.sleep(wait)
             return
+choose_mode()
