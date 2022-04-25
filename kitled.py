@@ -65,3 +65,6 @@ while True:
         pca.channels[x].duty_cycle = LEDOFF
         pca.channels[x].duty_cycle = LEDON
         time.sleep(wait)
+
+
+#Any random comment. Github test or something.
