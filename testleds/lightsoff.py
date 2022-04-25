@@ -21,21 +21,8 @@ pca.frequency = 60
 
 # Set the PWM duty cycle for channel zero to 50%. duty_cycle is 16 bits to match other PWM objects
 # but the PCA9685 will only actually give 12 bits of resolution.
-#Everything below this is Rons Code. Above is copy and pasted from Adafruit.
-
-LEDOFF = 0xFFFF
-LEDON = 0x7FFF
-wait = 2
-
-while True:
-
-    pca.channels[11].duty_cycle = LEDON 
-    pca.channels[10].duty_cycle = LEDON
-    pca.channels[9].duty_cycle =  LEDON
-    pca.channels[8].duty_cycle =  LEDON
-    time.sleep(wait)
-    pca.channels[11].duty_cycle = LEDOFF
-    pca.channels[10].duty_cycle = LEDOFF
-    pca.channels[9].duty_cycle =  LEDOFF
-    pca.channels[8].duty_cycle =  LEDOFF
-
+#MODDED BY RON
+pca.channels[11].duty_cycle = 0xFFFF
+pca.channels[10].duty_cycle = 0xFFFF
+pca.channels[9].duty_cycle = 0xFFFF
+pca.channels[8].duty_cycle = 0xFFFF

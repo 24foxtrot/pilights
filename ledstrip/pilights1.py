@@ -13,7 +13,7 @@ import pwmio
 # Import the PCA9685 module.
 from adafruit_pca9685 import PCA9685
 
-import random 
+import random
 
 # Create the I2C bus interface.
 i2c_bus = busio.I2C(SCL, SDA)
@@ -28,7 +28,7 @@ pca.frequency = 60
 # but the PCA9685 will only actually give 12 bits of resolution.
 
 # ropertyduty_cycle: int
-# 16 bit value that dictates how much of one cycle is high (1) versus low (0). 
+# 16 bit value that dictates how much of one cycle is high (1) versus low (0).
 # 0xffff will always be high, 0 will always be low and 0x7fff will be half high and then half low.
 
 
@@ -40,20 +40,21 @@ stripkit = 0, 3, 6, 13, 1, 4, 7, 14, 2, 5, 12, 15
 testleds = 8, 9 , 10, 11
 LEDOFF = 0x000
 LEDON = 0xFFFF
+NORMALED = 0
+wait = 1/64
 
 def choose_mode():
         global time_conversion
         lighting_time = 0
-        
-        while True:
-#            lighting_mode = random.randrange(3)
-#            lighting_time = random.randrange(3,6) 
-            lighting_mode = 2 
-#            time_conversion = lighting_time/30
-            time_conversion = random.randrange(10,15)
-#            print("The current mode is " + str(lighting_mode) + " for " + str(lighting_time) + " minutes.") 
 
-            if lighting_mode == 1:
+        while True:
+            lighting_mode = random.randrange(3)
+            lighting_time = random.randrange(3,6)
+#            lighting_mode = 0 
+            time_conversion = lighting_time/64
+#            print("The current mode is " + str(lighting_mode) + " for " + str(lighting_time) + " minutes.")
+
+            if lighting_mode == 0:
                 print("Running simplefade")
                 simple_fade()
             elif lighting_mode == 1:
@@ -63,10 +64,10 @@ def choose_mode():
                 print("Running stripkit_reid1")
                 stripkit_reid1()
             time.sleep(time_conversion)
-choose_mode
 
-def simple_fade(): #Works I think?
+choose_mode 
 
+def simple_fade():
     color_fade = 0xFFFF
     fade_increment = 100
     channel_number = 0
@@ -78,20 +79,21 @@ def simple_fade(): #Works I think?
             pca.channels[channel_number].duty_cycle = color_fade
             color_fade = color_fade - fade_increment
         pca.channels[channel_number].duty_cycle = 0x0000
-    
+
         color_fade = 0 #Bounds Check
-    
+
         while color_fade <= 0xFFFF :
             channel_number=random.randrange(16)
-#            print("Channel " + str(channel_number) + " is set to " + str(color_fade) )
+ #           print("Channel " + str(channel_number) + " is set to " + str(color_fade) )
             pca.channels[channel_number].duty_cycle = color_fade
             color_fade = color_fade + fade_increment
         color_fade = 0xFFFF #Bounds Check
-    #return
-        choose_mode()
+        return
 
-def strip_kit():  #works don't touch
-    wait = 1/32
+        choose_mode
+
+def strip_kit():
+    wait = 1/64
 
     while True:
         for x in stripkit:
@@ -115,10 +117,18 @@ def strip_kit():  #works don't touch
             pca.channels[x].duty_cycle = LEDOFF
             pca.channels[x].duty_cycle = LEDON
             time.sleep(wait)
-        choose_mode() 
-                    
+            
+            choose_mode
+
 def stripkit_reid1():
-    wait = 1/64 
+
+    if NORMALED == 1:
+        LEDOFF = 0x000
+        LEDON = 0xFFFF
+    else:
+        LEDOFF = 0xFFFF
+        LEDON = 0x000
+
     while True:
         for x in LEDSTRIP0:
             #Forward
@@ -143,14 +153,14 @@ def stripkit_reid1():
             pca.channels[x].duty_cycle = LEDON
             pca.channels[x].duty_cycle = LEDOFF
             pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x+6].duty_cycle = LEDOFF
-            pca.channels[x+6].duty_cycle = LEDON
-            pca.channels[x+6].duty_cycle = LEDOFF
-            pca.channels[x+6].duty_cycle = LEDOFF
             pca.channels[x+3].duty_cycle = LEDOFF
             pca.channels[x+3].duty_cycle = LEDON
             pca.channels[x+3].duty_cycle = LEDOFF
             pca.channels[x+3].duty_cycle = LEDOFF
+            pca.channels[x+6].duty_cycle = LEDOFF
+            pca.channels[x+6].duty_cycle = LEDON
+            pca.channels[x+6].duty_cycle = LEDOFF
+            pca.channels[x+6].duty_cycle = LEDOFF
             pca.channels[x+13].duty_cycle = LEDOFF
             pca.channels[x+13].duty_cycle = LEDON
             pca.channels[x+13].duty_cycle = LEDOFF
@@ -190,4 +200,7 @@ def stripkit_reid1():
             pca.channels[x+13].duty_cycle = LEDOFF
             pca.channels[x+13].duty_cycle = LEDON
             time.sleep(wait)
+            
+            choose_mode
 choose_mode()
+
