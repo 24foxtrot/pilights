@@ -119,7 +119,8 @@ def strip_kit():  #works don't touch
                     
 def stripkit_reid1():
     wait = 1/64 
-    while True:
+#    while True:
+    while time_conversion > 0:
         for x in LEDSTRIP0:
             #Forward
             pca.channels[x].duty_cycle = LEDON
