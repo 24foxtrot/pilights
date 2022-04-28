@@ -63,6 +63,7 @@ def choose_mode():
                 print("Running stripkit_reid1")
                 stripkit_reid1()
             time.sleep(time_conversion)
+            print("for " + str(time_conversion) + " seconds.")
 choose_mode
 
 def simple_fade(): #Works I think?
