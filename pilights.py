@@ -60,10 +60,9 @@ def choose_mode():
                 print("Running stripkit")
                 strip_kit()
             elif lighting_mode == 2:
-                print("Running stripkit_reid1")
+                print("Running stripkit_reid1 for " + str(time_conversion) + " seconds.")
                 stripkit_reid1()
             time.sleep(time_conversion)
-            print("for " + str(time_conversion) + " seconds.")
 choose_mode
 
 def simple_fade(): #Works I think?
