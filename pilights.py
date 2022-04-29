@@ -57,10 +57,10 @@ def choose_mode():
 
             if lighting_mode == 0:
                 print("Running simplefade" + str(time_conversion) + " seconds.")
-                simple_fade()
+                simple_fade(time_conversion)
             elif lighting_mode == 1:
                 print("Running stripkit for " + str(time_conversion) + " seconds.")
-                strip_kit()
+                strip_kit(time_conversion)
             elif lighting_mode == 2:
                 print("Running stripkit_reid1 for " + str(time_conversion) + " seconds.")
                 stripkit_reid1(time_conversion)
@@ -92,7 +92,7 @@ def simple_fade(time_in_seconds):
         color_fade = 0xFFFF #Bounds Check
 
         current_time=time.time()
-        print("Current time is " + str(current_time))
+#        print("Current time is " + str(current_time))
         if (current_time - start_time) > time_in_seconds:
             TIMETOQUIT = True 
     
@@ -127,7 +127,7 @@ def strip_kit(time_in_seconds):
             time.sleep(wait)
 
             current_time=time.time()
-            print("Current time is " + str(current_time))
+#            print("Current time is " + str(current_time))
             if (current_time - start_time) > time_in_seconds:
                 TIMETOQUIT = True 
     return
@@ -209,7 +209,7 @@ def stripkit_reid1(time_in_seconds):
             time.sleep(wait)
 
             current_time=time.time()
-            print("Current time is " + str(current_time))
+#            print("Current time is " + str(current_time))
             if (current_time - start_time) > time_in_seconds:
                 TIMETOQUIT = True 
                 
