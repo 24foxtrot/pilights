@@ -45,18 +45,14 @@ LEDON = 0xFFFF
 
 def choose_mode():
         global time_conversion
-        lighting_time = 0
         
         while True:
             lighting_mode = random.randrange(3)
-#            lighting_time = random.randrange(3,6) 
 #            lighting_mode = 1 
-#            time_conversion = lighting_time/30
             time_conversion = random.randrange(10,15)
-#            print("The current mode is " + str(lighting_mode) + " for " + str(lighting_time) + " minutes.") 
 
             if lighting_mode == 0:
-                print("Running simplefade" + str(time_conversion) + " seconds.")
+                print("Running simplefade for " + str(time_conversion) + " seconds.")
                 simple_fade(time_conversion)
             elif lighting_mode == 1:
                 print("Running stripkit for " + str(time_conversion) + " seconds.")
@@ -64,7 +60,8 @@ def choose_mode():
             elif lighting_mode == 2:
                 print("Running stripkit_reid1 for " + str(time_conversion) + " seconds.")
                 stripkit_reid1(time_conversion)
-            time.sleep(time_conversion)
+#            time.sleep(time_conversion)
+            print("Restarting current_mode")
 
 def simple_fade(time_in_seconds):
     start_time=time.time()
@@ -92,7 +89,7 @@ def simple_fade(time_in_seconds):
         color_fade = 0xFFFF #Bounds Check
 
         current_time=time.time()
-#        print("Current time is " + str(current_time))
+        print("Current time is " + str(current_time))
         if (current_time - start_time) > time_in_seconds:
             TIMETOQUIT = True 
     
@@ -127,7 +124,7 @@ def strip_kit(time_in_seconds):
             time.sleep(wait)
 
             current_time=time.time()
-#            print("Current time is " + str(current_time))
+            print("Current time is " + str(current_time))
             if (current_time - start_time) > time_in_seconds:
                 TIMETOQUIT = True 
     return
@@ -209,7 +206,7 @@ def stripkit_reid1(time_in_seconds):
             time.sleep(wait)
 
             current_time=time.time()
-#            print("Current time is " + str(current_time))
+            print("Current time is " + str(current_time))
             if (current_time - start_time) > time_in_seconds:
                 TIMETOQUIT = True 
                 
