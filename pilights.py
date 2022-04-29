@@ -4,6 +4,7 @@
 # This simple test outputs a 50% duty cycle PWM single on the 0th channel. Connect an LED and
 # resistor in series to the pin to visualize duty cycle changes and its impact on brightness.
 
+from operator import truediv
 from board import SCL, SDA
 import busio
 import time
@@ -39,7 +40,8 @@ LEDSTRIP3 = 13, 14, 15
 stripkit = 0, 3, 6, 13, 1, 4, 7, 14, 2, 5, 12, 15
 testleds = 8, 9 , 10, 11
 LEDOFF = 0x000
-LEDON = 0xFFFF
+LEDON = 0xFFFF  
+        
 
 def choose_mode():
         global time_conversion
@@ -53,7 +55,7 @@ def choose_mode():
             time_conversion = random.randrange(10,15)
 #            print("The current mode is " + str(lighting_mode) + " for " + str(lighting_time) + " minutes.") 
 
-            if lighting_mode == 1:
+            if lighting_mode == 0:
                 print("Running simplefade")
                 simple_fade()
             elif lighting_mode == 1:
@@ -61,9 +63,8 @@ def choose_mode():
                 strip_kit()
             elif lighting_mode == 2:
                 print("Running stripkit_reid1 for " + str(time_conversion) + " seconds.")
-                stripkit_reid1()
+                stripkit_reid1(time_conversion)
             time.sleep(time_conversion)
-choose_mode
 
 def simple_fade(): #Works I think?
 
@@ -87,8 +88,8 @@ def simple_fade(): #Works I think?
             pca.channels[channel_number].duty_cycle = color_fade
             color_fade = color_fade + fade_increment
         color_fade = 0xFFFF #Bounds Check
-    #return
-        choose_mode()
+    return
+
 
 def strip_kit():  #works don't touch
     wait = 1/32
@@ -117,10 +118,12 @@ def strip_kit():  #works don't touch
             time.sleep(wait)
         choose_mode() 
                     
-def stripkit_reid1():
+def stripkit_reid1(time_in_seconds):
+    start_time=time.time()
     wait = 1/64 
 #    while True:
-    while time_conversion > 0:
+    TIMETOQUIT = False
+    while not TIMETOQUIT:
         for x in LEDSTRIP0:
             #Forward
             pca.channels[x].duty_cycle = LEDON
@@ -191,4 +194,9 @@ def stripkit_reid1():
             pca.channels[x+13].duty_cycle = LEDOFF
             pca.channels[x+13].duty_cycle = LEDON
             time.sleep(wait)
-choose_mode()
+            
+            current_time=time.time()
+            if (current_time - start_time) > time_in_seconds:
+                TIMETOQUIT = True
+                
+    return
