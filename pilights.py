@@ -48,31 +48,33 @@ def choose_mode():
         lighting_time = 0
         
         while True:
-#            lighting_mode = random.randrange(3)
+            lighting_mode = random.randrange(3)
 #            lighting_time = random.randrange(3,6) 
-            lighting_mode = 2 
+#            lighting_mode = 1 
 #            time_conversion = lighting_time/30
             time_conversion = random.randrange(10,15)
 #            print("The current mode is " + str(lighting_mode) + " for " + str(lighting_time) + " minutes.") 
 
             if lighting_mode == 0:
-                print("Running simplefade")
+                print("Running simplefade" + str(time_conversion) + " seconds.")
                 simple_fade()
             elif lighting_mode == 1:
-                print("Running stripkit")
+                print("Running stripkit for " + str(time_conversion) + " seconds.")
                 strip_kit()
             elif lighting_mode == 2:
                 print("Running stripkit_reid1 for " + str(time_conversion) + " seconds.")
                 stripkit_reid1(time_conversion)
             time.sleep(time_conversion)
 
-def simple_fade(): #Works I think?
-
+def simple_fade(time_in_seconds):
+    start_time=time.time()
+    TIMETOQUIT = False
+    
     color_fade = 0xFFFF
     fade_increment = 100
     channel_number = 0
 
-    while True:
+    while not TIMETOQUIT:
         while color_fade > -1 :
             channel_number=random.randrange(16)
 #            print("Channel " + str(channel_number) + " is set to " + str(color_fade) )
@@ -88,13 +90,20 @@ def simple_fade(): #Works I think?
             pca.channels[channel_number].duty_cycle = color_fade
             color_fade = color_fade + fade_increment
         color_fade = 0xFFFF #Bounds Check
+
+        current_time=time.time()
+        print("Current time is " + str(current_time))
+        if (current_time - start_time) > time_in_seconds:
+            TIMETOQUIT = True 
+    
     return
 
 
-def strip_kit():  #works don't touch
+def strip_kit(time_in_seconds): 
+    start_time=time.time()
     wait = 1/32
-
-    while True:
+    TIMETOQUIT = False
+    while not TIMETOQUIT:
         for x in stripkit:
             pca.channels[x].duty_cycle = LEDON
             pca.channels[x].duty_cycle = LEDOFF
@@ -116,12 +125,16 @@ def strip_kit():  #works don't touch
             pca.channels[x].duty_cycle = LEDOFF
             pca.channels[x].duty_cycle = LEDON
             time.sleep(wait)
-        choose_mode() 
+
+            current_time=time.time()
+            print("Current time is " + str(current_time))
+            if (current_time - start_time) > time_in_seconds:
+                TIMETOQUIT = True 
+    return
                     
 def stripkit_reid1(time_in_seconds):
     start_time=time.time()
     wait = 1/64 
-#    while True:
     TIMETOQUIT = False
     while not TIMETOQUIT:
         for x in LEDSTRIP0:
@@ -194,7 +207,7 @@ def stripkit_reid1(time_in_seconds):
             pca.channels[x+13].duty_cycle = LEDOFF
             pca.channels[x+13].duty_cycle = LEDON
             time.sleep(wait)
-            
+
             current_time=time.time()
             print("Current time is " + str(current_time))
             if (current_time - start_time) > time_in_seconds:
