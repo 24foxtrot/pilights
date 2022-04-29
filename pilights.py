@@ -196,7 +196,14 @@ def stripkit_reid1(time_in_seconds):
             time.sleep(wait)
             
             current_time=time.time()
+            print("Current time is " + str(current_time))
             if (current_time - start_time) > time_in_seconds:
-                TIMETOQUIT = True
+                TIMETOQUIT = True 
                 
     return
+
+def main():
+    choose_mode()
+
+if __name__ == "__main__":
+    main()
