@@ -4,5 +4,4 @@ This file will contain directions on how to prepare your raspberry pi for this p
 
 Code Referenced or Used:
 
-https://circuitpython.readthedocs.io/projects/pca9685/en/latest/examples.html
-
+https://docs.circuitpython.org/projects/pca9685/en/latest/
