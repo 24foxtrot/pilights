@@ -101,26 +101,16 @@ def strip_kit(time_in_seconds):
     wait = 1/32
     TIMETOQUIT = False
     while not TIMETOQUIT:
-        for x in stripkit:
+        for x in LEDSTRIP0:
+            pca.channels[x].duty_cycle = LEDOFF
+            pca.channels[x+3].duty_cycle = LEDOFF
+            pca.channels[x+6].duty_cycle = LEDOFF
+            pca.channels[x+13].duty_cycle = LEDOFF
+            time.sleep(wait*3)
             pca.channels[x].duty_cycle = LEDON
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDOFF
-            time.sleep(wait)
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDON
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDOFF
-            time.sleep(wait)
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDON
-            pca.channels[x].duty_cycle = LEDOFF
-            time.sleep(wait)
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDON
+            pca.channels[x+3].duty_cycle = LEDON
+            pca.channels[x+6].duty_cycle = LEDON
+            pca.channels[x+13].duty_cycle = LEDON
             time.sleep(wait)
 
             current_time=time.time()
@@ -137,71 +127,23 @@ def stripkit_reid1(time_in_seconds):
         for x in LEDSTRIP0:
             #Forward
             pca.channels[x].duty_cycle = LEDON
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x+3].duty_cycle = LEDON
             pca.channels[x+3].duty_cycle = LEDOFF
-            pca.channels[x+3].duty_cycle = LEDOFF
-            pca.channels[x+3].duty_cycle = LEDOFF
-            pca.channels[x+6].duty_cycle = LEDON
             pca.channels[x+6].duty_cycle = LEDOFF
-            pca.channels[x+6].duty_cycle = LEDOFF
-            pca.channels[x+6].duty_cycle = LEDOFF
-            pca.channels[x+13].duty_cycle = LEDON
-            pca.channels[x+13].duty_cycle = LEDOFF
-            pca.channels[x+13].duty_cycle = LEDOFF
             pca.channels[x+13].duty_cycle = LEDOFF
             time.sleep(wait)
             pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDON
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x+6].duty_cycle = LEDOFF
-            pca.channels[x+6].duty_cycle = LEDON
-            pca.channels[x+6].duty_cycle = LEDOFF
-            pca.channels[x+6].duty_cycle = LEDOFF
-            pca.channels[x+3].duty_cycle = LEDOFF
             pca.channels[x+3].duty_cycle = LEDON
-            pca.channels[x+3].duty_cycle = LEDOFF
-            pca.channels[x+3].duty_cycle = LEDOFF
-            pca.channels[x+13].duty_cycle = LEDOFF
-            pca.channels[x+13].duty_cycle = LEDON
-            pca.channels[x+13].duty_cycle = LEDOFF
+            pca.channels[x+6].duty_cycle = LEDOFF
             pca.channels[x+13].duty_cycle = LEDOFF
             time.sleep(wait)
             pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDON
-            pca.channels[x].duty_cycle = LEDOFF
             pca.channels[x+3].duty_cycle = LEDOFF
-            pca.channels[x+3].duty_cycle = LEDOFF
-            pca.channels[x+3].duty_cycle = LEDON
-            pca.channels[x+3].duty_cycle = LEDOFF
-            pca.channels[x+6].duty_cycle = LEDOFF
-            pca.channels[x+6].duty_cycle = LEDOFF
             pca.channels[x+6].duty_cycle = LEDON
-            pca.channels[x+6].duty_cycle = LEDOFF
-            pca.channels[x+13].duty_cycle = LEDOFF
-            pca.channels[x+13].duty_cycle = LEDOFF
-            pca.channels[x+13].duty_cycle = LEDON
             pca.channels[x+13].duty_cycle = LEDOFF
             time.sleep(wait)
             pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDOFF
-            pca.channels[x].duty_cycle = LEDON
             pca.channels[x+3].duty_cycle = LEDOFF
-            pca.channels[x+3].duty_cycle = LEDOFF
-            pca.channels[x+3].duty_cycle = LEDOFF
-            pca.channels[x+3].duty_cycle = LEDON
             pca.channels[x+6].duty_cycle = LEDOFF
-            pca.channels[x+6].duty_cycle = LEDOFF
-            pca.channels[x+6].duty_cycle = LEDOFF
-            pca.channels[x+6].duty_cycle = LEDON
-            pca.channels[x+13].duty_cycle = LEDOFF
-            pca.channels[x+13].duty_cycle = LEDOFF
-            pca.channels[x+13].duty_cycle = LEDOFF
             pca.channels[x+13].duty_cycle = LEDON
             time.sleep(wait)
 
