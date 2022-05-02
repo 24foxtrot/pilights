@@ -221,7 +221,8 @@ def rows(time_in_seconds):
     LEDMODE = LEDOFF
     TIMETOTURNONLEDS = False
 
-    while True:
+    TIMETOQUIT = False 
+    while not TIMETOQUIT:
         if TIMETOTURNONLEDS: 
             LEDMODE = LEDON
         elif not TIMETOTURNONLEDS:
