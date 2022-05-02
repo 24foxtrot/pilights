@@ -47,7 +47,7 @@ def choose_mode():
         global time_conversion
         
         while True:
-            lighting_mode = random.randrange(3)
+            lighting_mode = random.randrange(4)
 #            lighting_mode = 1 
             time_conversion = random.randrange(10,15)
 
@@ -60,7 +60,9 @@ def choose_mode():
             elif lighting_mode == 2:
                 print("Running stripkit_reid1 for " + str(time_conversion) + " seconds.")
                 stripkit_reid1(time_conversion)
-#            time.sleep(time_conversion)
+            elif lighting_mode == 3:
+                print("Running rows for " + str(time_conversion) + " seconds.")
+                rows(time_conversion)
             print("Restarting current_mode")
 
 def simple_fade(time_in_seconds):
@@ -210,6 +212,40 @@ def stripkit_reid1(time_in_seconds):
             if (current_time - start_time) > time_in_seconds:
                 TIMETOQUIT = True 
                 
+    return
+
+def rows(time_in_seconds):
+    start_time=time.time()
+    wait = 1/8
+    LEDMODE = LEDOFF
+    TIMETOTURNONLEDS = False
+
+    while True:
+        if TIMETOTURNONLEDS: 
+            LEDMODE = LEDON
+        elif not TIMETOTURNONLEDS:
+            LEDMODE = LEDOFF
+
+        pca.channels[0].duty_cycle = LEDMODE #Red
+        pca.channels[1].duty_cycle = LEDMODE #Blue
+        pca.channels[2].duty_cycle = LEDMODE #Green
+        time.sleep(wait)
+        pca.channels[3].duty_cycle = LEDMODE #Red
+        pca.channels[4].duty_cycle = LEDMODE #Blue
+        pca.channels[5].duty_cycle = LEDMODE #Green
+        time.sleep(wait)
+        pca.channels[6].duty_cycle = LEDMODE #Red
+        pca.channels[7].duty_cycle = LEDMODE #Blue
+        pca.channels[12].duty_cycle = LEDMODE #Green
+        time.sleep(wait)
+        pca.channels[13].duty_cycle = LEDMODE #Red
+        pca.channels[14].duty_cycle = LEDMODE #Blue
+        pca.channels[15].duty_cycle = LEDMODE #Green
+
+        if TIMETOTURNONLEDS:
+            TIMETOTURNONLEDS = False
+        elif not TIMETOTURNONLEDS:
+            TIMETOTURNONLEDS = True
     return
 
 def main():
