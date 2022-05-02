@@ -246,6 +246,11 @@ def rows(time_in_seconds):
             TIMETOTURNONLEDS = False
         elif not TIMETOTURNONLEDS:
             TIMETOTURNONLEDS = True
+
+        current_time=time.time()
+        print("Current time is " + str(current_time))
+        if (current_time - start_time) > time_in_seconds:
+            TIMETOQUIT = True 
     return
 
 def main():
