@@ -63,6 +63,7 @@ def choose_mode():
             elif lighting_mode == 3:
                 print("Running rows for " + str(time_conversion) + " seconds.")
                 rows(time_conversion)
+
             print("Restarting current_mode")
 
 def simple_fade(time_in_seconds):
@@ -91,7 +92,7 @@ def simple_fade(time_in_seconds):
         color_fade = 0xFFFF #Bounds Check
 
         current_time=time.time()
-        print("Current time is " + str(current_time))
+ #       print("Current time is " + str(current_time))
         if (current_time - start_time) > time_in_seconds:
             TIMETOQUIT = True 
     
@@ -126,7 +127,7 @@ def strip_kit(time_in_seconds):
             time.sleep(wait)
 
             current_time=time.time()
-            print("Current time is " + str(current_time))
+#            print("Current time is " + str(current_time))
             if (current_time - start_time) > time_in_seconds:
                 TIMETOQUIT = True 
     return
@@ -208,7 +209,7 @@ def stripkit_reid1(time_in_seconds):
             time.sleep(wait)
 
             current_time=time.time()
-            print("Current time is " + str(current_time))
+#            print("Current time is " + str(current_time))
             if (current_time - start_time) > time_in_seconds:
                 TIMETOQUIT = True 
                 
@@ -248,9 +249,10 @@ def rows(time_in_seconds):
             TIMETOTURNONLEDS = True
 
         current_time=time.time()
-        print("Current time is " + str(current_time))
+#        print("Current time is " + str(current_time))
         if (current_time - start_time) > time_in_seconds:
             TIMETOQUIT = True 
+
     return
 
 def main():
