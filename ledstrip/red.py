@@ -33,12 +33,12 @@ pca.channels[5].duty_cycle = 0x0000 #Green
 
 pca.channels[6].duty_cycle = 0x0000 #Blue
 pca.channels[7].duty_cycle = 0x7777 #Red
-pca.channels[8].duty_cycle = 0x0000 #Green
+pca.channels[12].duty_cycle = 0x0000 #Green
 
+pca.channels[8].duty_cycle = 0x0000 #Test
 pca.channels[9].duty_cycle = 0x0000 #Test
 pca.channels[10].duty_cycle = 0x0000 #Test
 pca.channels[11].duty_cycle = 0x0000 #Test 
-pca.channels[12].duty_cycle = 0x0000 #Test
 
 pca.channels[13].duty_cycle = 0x0000 #Blue
 pca.channels[14].duty_cycle = 0x7777 #Red
