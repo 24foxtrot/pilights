@@ -40,7 +40,7 @@ LEDSTRIP3 = 13, 14, 15
 stripkit = 0, 3, 6, 13, 1, 4, 7, 14, 2, 5, 12, 15
 testleds = 8, 9 , 10, 11
 LEDOFF = 0x000
-LEDON = 0xFFFF  
+LEDON = 0x1FFF  
         
 
 def choose_mode():
@@ -70,7 +70,7 @@ def simple_fade(time_in_seconds):
     start_time=time.time()
     TIMETOQUIT = False
     
-    color_fade = 0xFFFF
+    color_fade = LEDON 
     fade_increment = 100
     channel_number = 0
 
@@ -84,12 +84,12 @@ def simple_fade(time_in_seconds):
     
         color_fade = 0 #Bounds Check
     
-        while color_fade <= 0xFFFF :
+        while color_fade <= LEDON :
             channel_number=random.randrange(16)
 #            print("Channel " + str(channel_number) + " is set to " + str(color_fade) )
             pca.channels[channel_number].duty_cycle = color_fade
             color_fade = color_fade + fade_increment
-        color_fade = 0xFFFF #Bounds Check
+        color_fade = LEDON #Bounds Check
 
         current_time=time.time()
  #       print("Current time is " + str(current_time))
