@@ -29,7 +29,7 @@ LEDOFF = 0x000
 LEDMODE = LEDOFF
 TIMETOTURNONLEDS = True
 while True:
-    wait = 1/8 
+    wait = 1/3 
 
     if TIMETOTURNONLEDS: 
         LEDMODE = LEDON
