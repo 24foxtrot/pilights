@@ -47,8 +47,8 @@ def choose_mode():
         global time_conversion
         
         while True:
-            lighting_mode = random.randrange(5)
-#            lighting_mode = 1 
+#            lighting_mode = random.randrange(5)
+            lighting_mode = 4
             time_conversion = random.randrange(10,15)
 
             if lighting_mode == 0:
@@ -259,7 +259,7 @@ def rows(time_in_seconds):
 
     return
 
-def jingle_bells():
+def jingle_bells(time_in_seconds):
     # SPDX-FileCopyrightText: 2021 ladyada for Adafruit Industries
     # SPDX-License-Identifier: MIT
 
@@ -339,6 +339,12 @@ def jingle_bells():
         pca.channels[11].duty_cycle = Test #Test
 
         time.sleep(2)
+
+        current_time=time.time()
+#        print("Current time is " + str(current_time))
+        if (current_time - start_time) > time_in_seconds:
+            TIMETOQUIT = True 
+
     return
 
 def main():
