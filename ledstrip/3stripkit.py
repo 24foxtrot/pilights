@@ -33,16 +33,16 @@ wait = .0625
 NORMALED = 0 
 
 if NORMALED == 1:
-    LEDOFF = 0x000
+    LEDOFF = 0x0000
     LEDON = 0xFFFF
 else:
     LEDOFF = 0xFFFF
-    LEDON = 0x000
+    LEDON = 0x0000
 
 while True:
 
-#    for x in [0, 3, 7, 1 , 4, 8 , 2 ,5, 9]:
-     for x in [1,4,7,14,0,3,6,13]:
+     for x in [0,3,6,13,1,4,7,14,2,5,12,15]:
+#     for x in [1,4,7,14,0,3,6,13]: #Red / Green
         #Forward
         pca.channels[x].duty_cycle = LEDON
         pca.channels[x].duty_cycle = LEDOFF
