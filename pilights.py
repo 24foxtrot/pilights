@@ -41,14 +41,16 @@ stripkit = 0, 3, 6, 13, 1, 4, 7, 14, 2, 5, 12, 15
 testleds = 8, 9 , 10, 11
 LEDOFF = 0x000
 LEDON = 0x1FFF  
+HALF = 0x3bbb #LEDHALF
+QRTR = 0x1ddd #LEDQUARTER brightness
         
 
 def choose_mode():
         global time_conversion
         
         while True:
-#            lighting_mode = random.randrange(5)
-            lighting_mode = 4
+#            lighting_mode = random.randrange(6)
+            lighting_mode = 5
             time_conversion = random.randrange(10,15)
 
             if lighting_mode == 0:
@@ -66,6 +68,9 @@ def choose_mode():
             elif lighting_mode == 4:
                 print("Running jingle_bells for " + str(time_conversion) + " seconds.")
                 jingle_bells(time_conversion)
+            elif lighting_mode == 5:
+                print("Running stvaltrix " + str(time_conversion) + " seconds.")
+                stvaltrix(time_conversion)
 
             print("Restarting current_mode")
 
@@ -325,6 +330,98 @@ def jingle_bells(time_in_seconds):
             TIMETOQUIT = True 
 
     return
+
+def stvaltrix(time_in_seconds):
+    start_time=time.time()
+    TIMETOQUIT = False
+
+    while not TIMETOQUIT:
+    
+ #   LEDON = 0x7777
+ #   LEDOFF = 0x000
+ #   HALF = 0x3bbb
+#    QRTR = 0x1ddd
+
+    LEDMODE = LEDOFF
+    TIMETOTURNONLEDS = True
+
+    while True:
+        wait = .0625 #(1/8)/2 
+        onwait = .25  #.1666 #(1/3)/2
+
+        if TIMETOTURNONLEDS: 
+            LEDMODE = LEDON
+        elif not TIMETOTURNONLEDS:
+            LEDMODE = LEDOFF
+
+        pca.channels[0].duty_cycle = LEDOFF #Green
+        pca.channels[1].duty_cycle = LEDMODE #Red
+        pca.channels[2].duty_cycle = LEDMODE #Blue
+        time.sleep(onwait) #off 
+        pca.channels[0].duty_cycle = QRTR #Green
+        pca.channels[1].duty_cycle = LEDOFF #Red
+        pca.channels[2].duty_cycle = LEDOFF #Blue
+        time.sleep(wait)
+        pca.channels[3].duty_cycle = LEDOFF #Green
+        pca.channels[4].duty_cycle = LEDMODE #Red
+        pca.channels[5].duty_cycle = LEDMODE #Blue
+        time.sleep(onwait) #off
+        pca.channels[3].duty_cycle = QRTR #Green
+        pca.channels[4].duty_cycle = LEDOFF #Red
+        pca.channels[5].duty_cycle = LEDOFF #Blue
+        time.sleep(wait)
+        pca.channels[6].duty_cycle = LEDOFF #Green
+        pca.channels[7].duty_cycle = LEDMODE #Red
+        pca.channels[12].duty_cycle = LEDMODE #Blue 
+        time.sleep(onwait) #off
+        pca.channels[6].duty_cycle = QRTR #Green
+        pca.channels[7].duty_cycle = LEDOFF #Red
+        pca.channels[12].duty_cycle = LEDOFF #Blue 
+        time.sleep(wait)
+        pca.channels[13].duty_cycle = LEDOFF #Green
+        pca.channels[14].duty_cycle = LEDMODE #Red
+        pca.channels[15].duty_cycle = LEDMODE #Blue
+        time.sleep(onwait) #off
+        pca.channels[13].duty_cycle = QRTR #Green
+        pca.channels[14].duty_cycle = LEDOFF #Red
+        pca.channels[15].duty_cycle = LEDOFF #Blue
+    #Reverse
+        time.sleep(wait) #REVERSE --Reverse all LEDMODES due to TIMETOTURNONLEDS flipflip breaking colors. 
+        pca.channels[12].duty_cycle = LEDMODE #Blue
+        pca.channels[7].duty_cycle = LEDMODE #Red
+        pca.channels[6].duty_cycle = LEDOFF #Green
+        time.sleep(onwait)
+        pca.channels[12].duty_cycle = LEDOFF #Blue
+        pca.channels[7].duty_cycle = LEDOFF #Red
+        pca.channels[6].duty_cycle = QRTR #Green
+        time.sleep(wait)
+        pca.channels[5].duty_cycle = LEDMODE #Blue
+        pca.channels[4].duty_cycle = LEDMODE #Red
+        pca.channels[3].duty_cycle = LEDOFF #Green 
+        time.sleep(onwait)
+        pca.channels[5].duty_cycle = LEDOFF #Blue
+        pca.channels[4].duty_cycle = LEDOFF #Red
+        pca.channels[3].duty_cycle = QRTR #Green 
+        time.sleep(wait)
+        pca.channels[2].duty_cycle = LEDMODE #Blue
+        pca.channels[1].duty_cycle = LEDMODE #Red
+        pca.channels[0].duty_cycle = LEDOFF #Green
+    #    time.sleep(onwait)
+        pca.channels[2].duty_cycle = LEDOFF #Blue
+        pca.channels[1].duty_cycle = LEDOFF #Red
+        pca.channels[0].duty_cycle = QRTR #Green
+
+    #    if TIMETOTURNONLEDS:
+    #        TIMETOTURNONLEDS = False
+    #    elif not TIMETOTURNONLEDS:
+    #        TIMETOTURNONLEDS = True
+
+    current_time=time.time()
+        print("Current time is " + str(current_time))
+        if (current_time - start_time) > time_in_seconds:
+            TIMETOQUIT = True 
+
+   return
 
 #def new_mode(time_in_seconds)
 #    start_time=time.time()
