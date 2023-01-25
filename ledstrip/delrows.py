@@ -41,49 +41,67 @@ while True:
     pca.channels[1].duty_cycle = LEDMODE #Red
     pca.channels[2].duty_cycle = LEDMODE #Blue
     time.sleep(wait)
-    pca.channels[3].duty_cycle = LEDOFF #Green
-    pca.channels[4].duty_cycle = LEDMODE #Red
-    pca.channels[5].duty_cycle = LEDMODE #Blue
-    time.sleep(wait)
-    pca.channels[6].duty_cycle = LEDOFF #Green
-    pca.channels[7].duty_cycle = LEDMODE #Red
-    pca.channels[12].duty_cycle = LEDMODE #Blue 
-    time.sleep(wait)
-    pca.channels[13].duty_cycle = LEDOFF #Green
-    pca.channels[14].duty_cycle = LEDMODE #Red
-    pca.channels[15].duty_cycle = LEDMODE #Blue
-#TurnOff
     pca.channels[0].duty_cycle = LEDOFF #Green
     pca.channels[1].duty_cycle = LEDOFF #Red
     pca.channels[2].duty_cycle = LEDOFF #Blue
+    time.sleep(wait)
+    pca.channels[3].duty_cycle = LEDOFF #Green
+    pca.channels[4].duty_cycle = LEDMODE #Red
+    pca.channels[5].duty_cycle = LEDMODE #Blue
     time.sleep(wait)
     pca.channels[3].duty_cycle = LEDOFF #Green
     pca.channels[4].duty_cycle = LEDOFF #Red
     pca.channels[5].duty_cycle = LEDOFF #Blue
     time.sleep(wait)
     pca.channels[6].duty_cycle = LEDOFF #Green
+    pca.channels[7].duty_cycle = LEDMODE #Red
+    pca.channels[12].duty_cycle = LEDMODE #Blue 
+    time.sleep(wait)
+    pca.channels[6].duty_cycle = LEDOFF #Green
     pca.channels[7].duty_cycle = LEDOFF #Red
     pca.channels[12].duty_cycle = LEDOFF #Blue 
     time.sleep(wait)
     pca.channels[13].duty_cycle = LEDOFF #Green
+    pca.channels[14].duty_cycle = LEDMODE #Red
+    pca.channels[15].duty_cycle = LEDMODE #Blue
+    time.sleep(wait)
+    pca.channels[13].duty_cycle = LEDOFF #Green
     pca.channels[14].duty_cycle = LEDOFF #Red
     pca.channels[15].duty_cycle = LEDOFF #Blue
+ 
+#Reverse
     
     time.sleep(wait) #REVERSE --Reverse all LEDMODES due to TIMETOTURNONLEDS flipflip breaking colors. 
     pca.channels[15].duty_cycle = LEDMODE #Blue
     pca.channels[14].duty_cycle = LEDMODE #Red
     pca.channels[13].duty_cycle = LEDOFF #Green
     time.sleep(wait)
+    pca.channels[15].duty_cycle = LEDOFF #Blue
+    pca.channels[14].duty_cycle = LEDOFF #Red
+    pca.channels[13].duty_cycle = LEDOFF #Green
+    time.sleep(wait)
     pca.channels[12].duty_cycle = LEDMODE #Blue
     pca.channels[7].duty_cycle = LEDMODE #Red
+    pca.channels[6].duty_cycle = LEDOFF #Green
+    time.sleep(wait)
+    pca.channels[12].duty_cycle = LEDOFF #Blue
+    pca.channels[7].duty_cycle = LEDOFF #Red
     pca.channels[6].duty_cycle = LEDOFF #Green
     time.sleep(wait)
     pca.channels[5].duty_cycle = LEDMODE #Blue
     pca.channels[4].duty_cycle = LEDMODE #Red
     pca.channels[3].duty_cycle = LEDOFF #Green 
     time.sleep(wait)
+    pca.channels[5].duty_cycle = LEDOFF #Blue
+    pca.channels[4].duty_cycle = LEDOFF #Red
+    pca.channels[3].duty_cycle = LEDOFF #Green 
+    time.sleep(wait)
     pca.channels[2].duty_cycle = LEDMODE #Blue
     pca.channels[1].duty_cycle = LEDMODE #Red
+    pca.channels[0].duty_cycle = LEDOFF #Green
+    time.sleep(wait)
+    pca.channels[2].duty_cycle = LEDOFF #Blue
+    pca.channels[1].duty_cycle = LEDOFF #Red
     pca.channels[0].duty_cycle = LEDOFF #Green
 
     if TIMETOTURNONLEDS:
