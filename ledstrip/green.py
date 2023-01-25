@@ -22,6 +22,7 @@ pca.frequency = 60
 # Set the PWM duty cycle for channel zero to 50%. duty_cycle is 16 bits to match other PWM objects
 # but the PCA9685 will only actually give 12 bits of resolution.
 #MODDED BY RON
+
 pca.channels[0].duty_cycle = 0x7777 #Green
 pca.channels[1].duty_cycle = 0x0000 #Red
 pca.channels[2].duty_cycle = 0x0000 #Blue
