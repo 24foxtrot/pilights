@@ -14,10 +14,8 @@ pir = MotionSensor(17)
 
 while True:
     pir.wait_for_motion()
-    print("You moved")
-    pir.wait_for_no_motion()
-    
-#    while True():
+        
+    #while waitingstill():
     for x in (8, 9, 10, 11):
         pca.channels[x].duty_cycle=0x7FFF
         pca.channels[x].duty_cycle=0xFFFF
@@ -39,3 +37,6 @@ while True:
         pca.channels[x].duty_cycle=0xFFFF
         pca.channels[x].duty_cycle=0x7FFF
         time.sleep(.0625)
+    print("You moved")
+    pir.wait_for_no_motion()
+
