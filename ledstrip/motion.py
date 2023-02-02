@@ -11,10 +11,12 @@ pca = PCA9685(i2c_bus)
 pca.frequency = 60
 #
 pir = MotionSensor(17)
+timedelay = 5
 
 while True:
     pir.wait_for_motion()
-    print("You moved")
+    start_time=time.time()
+    print("The room is occupied. " + str(start_time))
     pca.channels[0].duty_cycle=0xFFFF
     pca.channels[1].duty_cycle=0xFFFF
     pca.channels[2].duty_cycle=0xFFFF
@@ -28,6 +30,7 @@ while True:
     pca.channels[14].duty_cycle=0xFFFF
     pca.channels[15].duty_cycle=0xFFFF
     pir.wait_for_no_motion()
+    end_time=time.time()
     pca.channels[0].duty_cycle=0x0
     pca.channels[1].duty_cycle=0x0
     pca.channels[2].duty_cycle=0x0
@@ -40,3 +43,6 @@ while True:
     pca.channels[13].duty_cycle=0x0
     pca.channels[14].duty_cycle=0x0
     pca.channels[15].duty_cycle=0x0
+
+    if (end_time - start_time) > timedelay:
+        print("greater than " + str(timedelay))
