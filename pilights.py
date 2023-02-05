@@ -1,9 +1,3 @@
-# SPDX-FileCopyrightText: 2021 ladyada for Adafruit Industries
-# SPDX-License-Identifier: MIT
-
-# This simple test outputs a 50% duty cycle PWM single on the 0th channel. Connect an LED and
-# resistor in series to the pin to visualize duty cycle changes and its impact on brightness.
-
 from operator import truediv
 from board import SCL, SDA
 import busio
@@ -24,14 +18,6 @@ pca = PCA9685(i2c_bus)
 
 # Set the PWM frequency to 60hz.
 pca.frequency = 60
-
-# Set the PWM duty cycle for channel zero to 50%. duty_cycle is 16 bits to match other PWM objects
-# but the PCA9685 will only actually give 12 bits of resolution.
-
-# ropertyduty_cycle: int
-# 16 bit value that dictates how much of one cycle is high (1) versus low (0). 
-# 0xffff will always be high, 0 will always be low and 0x7fff will be half high and then half low.
-
 
 LEDSTRIP0 = 0, 1, 2
 LEDSTRIP1 = 3, 4, 5
