@@ -50,7 +50,7 @@ def choose_mode():
         
         while True:
 #            lighting_mode = random.randrange(6)
-            lighting_mode = 5 
+            lighting_mode = 4 
             time_conversion = random.randrange(10,15)
 
             if lighting_mode == 0:
