@@ -29,6 +29,7 @@ LEDOFF = 0x000
 HALF = 0x3bbb
 QRTR = 0x1ddd
 
+ONLVL = LEDON
 LEDMODE = LEDOFF
 TIMETOTURNONLEDS = True
 
@@ -45,7 +46,7 @@ while True:
     pca.channels[1].duty_cycle = LEDMODE #Red
     pca.channels[2].duty_cycle = LEDMODE #Blue
     time.sleep(onwait) #off 
-    pca.channels[0].duty_cycle = QRTR #Green
+    pca.channels[0].duty_cycle = ONLVL #Green
     pca.channels[1].duty_cycle = LEDOFF #Red
     pca.channels[2].duty_cycle = LEDOFF #Blue
     time.sleep(wait)
@@ -53,7 +54,7 @@ while True:
     pca.channels[4].duty_cycle = LEDMODE #Red
     pca.channels[5].duty_cycle = LEDMODE #Blue
     time.sleep(onwait) #off
-    pca.channels[3].duty_cycle = QRTR #Green
+    pca.channels[3].duty_cycle = ONLVL #Green
     pca.channels[4].duty_cycle = LEDOFF #Red
     pca.channels[5].duty_cycle = LEDOFF #Blue
     time.sleep(wait)
@@ -61,7 +62,7 @@ while True:
     pca.channels[7].duty_cycle = LEDMODE #Red
     pca.channels[12].duty_cycle = LEDMODE #Blue 
     time.sleep(onwait) #off
-    pca.channels[6].duty_cycle = QRTR #Green
+    pca.channels[6].duty_cycle = ONLVL #Green
     pca.channels[7].duty_cycle = LEDOFF #Red
     pca.channels[12].duty_cycle = LEDOFF #Blue 
     time.sleep(wait)
@@ -69,7 +70,7 @@ while True:
     pca.channels[14].duty_cycle = LEDMODE #Red
     pca.channels[15].duty_cycle = LEDMODE #Blue
     time.sleep(onwait) #off
-    pca.channels[13].duty_cycle = QRTR #Green
+    pca.channels[13].duty_cycle = ONLVL #Green
     pca.channels[14].duty_cycle = LEDOFF #Red
     pca.channels[15].duty_cycle = LEDOFF #Blue
 #Reverse
@@ -80,7 +81,7 @@ while True:
     time.sleep(onwait)
     pca.channels[12].duty_cycle = LEDOFF #Blue
     pca.channels[7].duty_cycle = LEDOFF #Red
-    pca.channels[6].duty_cycle = QRTR #Green
+    pca.channels[6].duty_cycle = ONLVL #Green
     time.sleep(wait)
     pca.channels[5].duty_cycle = LEDMODE #Blue
     pca.channels[4].duty_cycle = LEDMODE #Red
@@ -88,7 +89,7 @@ while True:
     time.sleep(onwait)
     pca.channels[5].duty_cycle = LEDOFF #Blue
     pca.channels[4].duty_cycle = LEDOFF #Red
-    pca.channels[3].duty_cycle = QRTR #Green 
+    pca.channels[3].duty_cycle = ONLVL #Green 
     time.sleep(wait)
     pca.channels[2].duty_cycle = LEDMODE #Blue
     pca.channels[1].duty_cycle = LEDMODE #Red
@@ -96,7 +97,7 @@ while True:
 #    time.sleep(onwait)
     pca.channels[2].duty_cycle = LEDOFF #Blue
     pca.channels[1].duty_cycle = LEDOFF #Red
-    pca.channels[0].duty_cycle = QRTR #Green
+    pca.channels[0].duty_cycle = ONLVL #Green
 
 #    if TIMETOTURNONLEDS:
 #        TIMETOTURNONLEDS = False
