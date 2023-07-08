@@ -1,9 +1,9 @@
-from lib.strategy.console import ConsoleStrategy
-pca = ConsoleStrategy()
+from lib.strategy.game import PygameStrategy
+pca = PygameStrategy()
 '''
     Example:
         from the root of the repo run the following:
-        python -m examples.console_example
+        python -m examples.game_example
 '''
 
 from lib.sequence.jingle_bells import jingle_bells
